@@ -2,7 +2,7 @@ $(document).ready(function(){
    // alert(1);
    
 // on load, loading data
-    axios.get("microToc.json").then(response => {
+    axios.get("General_principles.fetchtoc.json").then(response => {
         console.log("load data", response.data)
         creatMenuTree($('#menuList'), response.data.childlinks, 'tv-ul')      
         getActiveLink(); 
@@ -21,7 +21,9 @@ $(document).ready(function(){
             liElement.setAttribute('data-title', this.title);
             liElement.setAttribute('data-click-state', 1)
            liElement.setAttribute('data-opentoc', 0); 
-            if (this.toc) {
+           console.log("childlinks", this.childlinks)
+         
+            if (typeof this.childlinks !=='undefined') {
                 var spanElement = document.createElement('span');                
                 anchorTag.href= '#'+this.title
                 anchorTag.innerHTML = this.title;
@@ -29,12 +31,15 @@ $(document).ready(function(){
                 spanElement.className = 'tv-caret';
                 liElement.append(spanElement);
                 creatMenuTree(liElement, this.childlinks,'tv-nested')
+                parentUl.append(liElement);
                 } else {
+                    console.log("else", this.title)
                     anchorTag.href= '#'+this.title
                     anchorTag.innerHTML = this.title;
                     liElement.append(anchorTag)
+                    parentUl.append(liElement);
               }
-              parentUl.append(liElement);
+             
 
         })
         return parent.append(parentUl);
@@ -50,19 +55,20 @@ $(document).ready(function(){
       
             if($this.parents('li').attr("data-level")==1 && opentoc ==0){ 
             opentoc =$this.parent('li').attr('data-opentoc',1);
-              
-                    axios.get("microToc1.json").then(response => {
+                    if(childUiBind.text() == ''){
+                        childUiBind.remove();
+                    }
+                    axios.get("115496.fetchtoc.json").then(response => {
                        
                             console.log("on click get data ====>", response.data)
                              for(i in response.data.childlinks){
                                 if(response.data.childlinks[i].nodelink == getNodeLink){   
                                    
                                      tree = response.data.childlinks[i].childlinks; 
+                                     console.log("tree data ", tree)
                                      // recursively tree-menu function calling               
                                         creatMenuTree($this.parent('li'), tree, 'tv-nested')                       
-                                        if(childUiBind.text() == ''){
-                                            childUiBind.remove();
-                                        }                                 
+                                                                        
                                       
                                     }
                                     
@@ -73,7 +79,7 @@ $(document).ready(function(){
                              
  
                          })
-               
+                       
             }else{
                 $this.next('.tv-nested').toggleClass("active");
                 $this.toggleClass("tv-caret-down");
@@ -97,6 +103,7 @@ $(document).ready(function(){
             $(t).addClass('active');
             $(t).parents('.tv-caret').addClass('tv-caret-down')
             $(t).parents('.tv-nested').addClass('active')
+            $(t).parents().siblings('.tv-caret').addClass('tv-caret-down')
             $(t).parents('.tv-caret').siblings('.tv-nested').addClass('active')         
         });
     }
