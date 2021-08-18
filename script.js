@@ -32,17 +32,19 @@ $(document).ready(function(){
                 liElement.append(spanElement);
                 creatMenuTree(liElement, this.childlinks,'tv-nested')
                 parentUl.append(liElement);
+               
                 } else {
-                    console.log("else", this.title)
+                   // console.log("else", this.title)
                     anchorTag.href= '#'+this.title
                     anchorTag.innerHTML = this.title;
                     liElement.append(anchorTag)
                     parentUl.append(liElement);
+                   
               }
              
-
+              return parent.append(parentUl);
         })
-        return parent.append(parentUl);
+         
     }
  
     $(document).on('click','.tv-caret', function (event) {
