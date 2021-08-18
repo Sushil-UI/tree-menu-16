@@ -18,7 +18,15 @@ ul,
     /* IE 10+ */
     user-select: none;
 }
-
+li a{
+    text-decoration: none;
+    color: #000
+}
+a.active{
+    background-color: #D04A02;
+    color: #fff;
+    display: inline-block;
+}
 .tv-caret:before{
     content: '';
     width: 20px;
