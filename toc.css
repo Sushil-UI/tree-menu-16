@@ -1,0 +1,30 @@
+.toc-content .toc-container, .searchdocv2-content .toc-container {
+    width: 100%;
+    height: 100% !important;
+    background-color: #F7F7F7;
+    padding: 30px;
+    overflow-y: auto !important;
+    max-height: 89vh;
+}
+.toc-content .toc-item, .searchdocv2-content .toc-item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    flex-basis: 100%;
+}
+.toc-content .toc-item:not(:first-child), .searchdocv2-content .toc-item:not(:first-child) {
+    padding-top: 15px;
+}
+.toc-content .toc-item button, .searchdocv2-content .toc-item button {
+    left: -10px;
+    position: relative;
+    top: 1px;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+.toc-content .toc-item > .toc-item, .searchdocv2-content .toc-item > .toc-item {
+    flex-basis: 100%;
+    padding-top: 15px;
+    margin-left: 25px;
+}
